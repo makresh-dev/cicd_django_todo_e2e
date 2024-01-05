@@ -10,7 +10,7 @@ pipeline {
         
         stage('Checkout'){
            steps {
-                git credentialsId: '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', 
+                git credentialsId: '', 
                 url: 'https://github.com/makresh-dev/cicd_django_todo_e2e',
                 branch: 'main'
            }
@@ -30,7 +30,7 @@ pipeline {
         stage('Push the artifacts'){
            steps{
                 script{
-                    withCredentials([usernamePassword(credentialsId: 'dckr_pat_Hh5VkzdksGSXkxbPwC99rkIrgzk', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: '', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh '''
                     echo 'Push to Repo'
                     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
@@ -43,7 +43,7 @@ pipeline {
         
         stage('Checkout K8S manifest SCM'){
             steps {
-                git credentialsId: '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', 
+                git credentialsId: '', 
                 url: 'https://github.com/makresh-dev/cicd_manifest_todo_app.git',
                 branch: 'main'
             }
@@ -52,7 +52,7 @@ pipeline {
         stage('Update K8S manifest & push to Repo'){
             steps {
                 script{
-                    withCredentials([usernamePassword(credentialsId: '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', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: '', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
                         sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
