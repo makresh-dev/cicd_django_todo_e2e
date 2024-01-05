@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout'){
            steps {
                 git credentialsId: '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', 
-                url: 'https://github.com/makresh-dev/cicd_django_todo_e2e.git',
+                url: 'https://github.com/makresh-dev/cicd_django_todo_e2e',
                 branch: 'main'
            }
         }
