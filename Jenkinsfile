@@ -10,7 +10,7 @@ pipeline {
         
         stage('Checkout'){
            steps {
-                git credentialsId: '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', 
+                git credentialsId: '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', 
                 url: 'https://github.com/makresh-dev/cicd_django_todo_e2e',
                 branch: 'main'
            }
@@ -21,7 +21,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    docker build -t mknnyk/django_todo_cicd:${BUILD_NUMBER} .
+                    sudo docker build -t mknnyk/django_todo_cicd:${BUILD_NUMBER} .
                     '''
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    docker push mknnyk/django_todo_cicd:${BUILD_NUMBER}
+                    sudo docker push mknnyk/django_todo_cicd:${BUILD_NUMBER}
                     '''
                 }
             }
@@ -40,7 +40,7 @@ pipeline {
         
         stage('Checkout K8S manifest SCM'){
             steps {
-                git credentialsId: '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', 
+                git credentialsId: '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', 
                 url: 'https://github.com/makresh-dev/cicd-demo-manifests-repo.git',
                 branch: 'main'
             }
@@ -49,7 +49,7 @@ pipeline {
         stage('Update K8S manifest & push to Repo'){
             steps {
                 script{
-                    withCredentials([usernamePassword(credentialsId: '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', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: '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', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
                         sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
