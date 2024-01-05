@@ -21,7 +21,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Buid Docker Image'
-                    sudo docker build -t mknnyk/django_todo_cicd:${BUILD_NUMBER} .
+                    docker build -t mknnyk/django_todo_cicd:${BUILD_NUMBER} .
                     '''
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
                 script{
                     sh '''
                     echo 'Push to Repo'
-                    sudo docker push mknnyk/django_todo_cicd:${BUILD_NUMBER}
+                    docker push mknnyk/django_todo_cicd:${BUILD_NUMBER}
                     '''
                 }
             }
