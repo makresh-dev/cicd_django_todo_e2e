@@ -10,8 +10,8 @@ pipeline {
         
         stage('Checkout'){
            steps {
-                git credentialsId: '', 
-                url: '',
+                git credentialsId: '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', 
+                url: 'https://github.com/makresh-dev/cicd_django_todo_e2e.git',
                 branch: 'main'
            }
         }
@@ -40,7 +40,7 @@ pipeline {
         
         stage('Checkout K8S manifest SCM'){
             steps {
-                git credentialsId: '', 
+                git credentialsId: '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', 
                 url: 'https://github.com/makresh-dev/cicd-demo-manifests-repo.git',
                 branch: 'main'
             }
@@ -49,7 +49,7 @@ pipeline {
         stage('Update K8S manifest & push to Repo'){
             steps {
                 script{
-                    withCredentials([usernamePassword(credentialsId: '', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: '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', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
                         sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
