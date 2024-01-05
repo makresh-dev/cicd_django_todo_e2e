@@ -30,10 +30,13 @@ pipeline {
         stage('Push the artifacts'){
            steps{
                 script{
+                    withCredentials([usernamePassword(credentialsId: 'dckr_pat_Hh5VkzdksGSXkxbPwC99rkIrgzk', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh '''
                     echo 'Push to Repo'
+                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                     docker push mknnyk/django_todo_cicd:${BUILD_NUMBER}
                     '''
+            }
                 }
             }
         }
