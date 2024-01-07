@@ -54,12 +54,11 @@ pipeline {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'jenkins_cicd', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
-                        sed -i "s/mknnyk\/django_todo_cicd:[0-9]*/mknnyk\/django_todo_cicd:${BUILD_NUMBER}/g" cicd_manifest/deploy.yaml
-                        cat deploy.yaml
-                        git add deploy.yaml
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git remote -v
-                        git push https://github.com/makresh-dev/cicd_django_todo_e2e.git HEAD:main
+                        sed -i "s|mknnyk/django_todo_cicd:[0-9]*|mknnyk/django_todo_cicd:${BUILD_NUMBER}|g" cicd_manifest/deploy.yaml
+                        cat cicd_manifest/deploy.yaml
+                        git add cicd_manifest/deploy.yaml
+                        git commit -m "Updated the deploy yaml | Jenkins Pipeline"
+                        git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/makresh-dev/cicd_django_todo_e2e.git HEAD:main
                         '''                        
                     }
                 }
