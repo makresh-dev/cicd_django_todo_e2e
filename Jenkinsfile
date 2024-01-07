@@ -3,7 +3,7 @@ pipeline {
     agent any 
     
     environment {
-        IMAGE_TAG = "32"
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
     
     stages {
