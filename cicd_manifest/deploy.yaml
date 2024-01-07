@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: todo-app
-        image: mknnyk/django_todo_cicd:${BUILD_NUMBER}
+        image: mknnyk/django_todo_cicd:49${BUILD_NUMBER}
         ports:
         - containerPort: 8000
 
