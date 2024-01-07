@@ -33,7 +33,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker_hub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh '''
                     echo 'Push to Repo'
-                    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+                    docker login -u $DOCKER_USERNAME ---password-stdin $DOCKER_PASSWORD
                     docker push mknnyk/django_todo_cicd:${BUILD_NUMBER}
                     '''
             }
