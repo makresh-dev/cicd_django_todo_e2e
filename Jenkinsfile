@@ -54,7 +54,7 @@ pipeline {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'jenkins_cicd', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
-                        sed -i '' "s/45/${BUILD_NUMBER}/g" cicd_manifest/deploy.yaml
+                        sed -i "s/mknnyk\/django_todo_cicd:[0-9]*/mknnyk\/django_todo_cicd:${BUILD_NUMBER}/g" cicd_manifest/deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
