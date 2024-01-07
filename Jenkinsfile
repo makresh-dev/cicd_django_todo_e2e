@@ -30,7 +30,7 @@ pipeline {
         stage('Push the artifacts'){
            steps{
                 script{
-                    withCredentials([usernamePassword(credentialsId: 'jenkins_cicd', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker_hub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh '''
                     echo 'Push to Repo'
                     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
